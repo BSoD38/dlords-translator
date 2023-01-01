@@ -48,7 +48,6 @@ export class DLTextFile {
     for (const index in strings) {
       this.textEntries.push(new DLTextEntry(metadata[index][0], strings[index]));
     }
-    console.log(this.textEntries);
   }
 
   littleEndianUint8ToUint32(bytes: Uint8Array): number {
@@ -124,12 +123,14 @@ export class DLTextEntry {
     return this._text;
   }
   public set text(value: string) {
+    value = value ?? "";
     // eslint-disable-next-line no-control-regex
-    if (/^[\x00-\x7F\xA0-\xFF]+$/.test(value)) {
+    if (/^[\x00-\x7F\xA0-\xFF\u2013\u2014\u0152\u0153]*$/.test(value)) {
       this.isValid = true;
       this._text = value;
     } else {
       if (value) {
+        console.warn("illegal text", value);
         this.isValid = false;
       }
     }
