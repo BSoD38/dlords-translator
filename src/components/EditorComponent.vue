@@ -11,7 +11,7 @@
           {{ entry.id }}
         </div>
         <div class="column">
-          <textarea v-model="entry.text" @focusout="trim(entry)"></textarea>
+          <textarea v-model="entry.text"></textarea>
         </div>
       </div>
     </div>
@@ -27,9 +27,6 @@ export default {
   methods: {
     saveFile() {
       this.$emit("save");
-    },
-    trim(entry) {
-      entry.text = entry.text.trim();
     },
   },
   name: "EditorComponent",

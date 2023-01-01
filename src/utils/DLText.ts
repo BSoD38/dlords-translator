@@ -129,7 +129,9 @@ export class DLTextEntry {
       this.isValid = true;
       this._text = value;
     } else {
-      this.isValid = false;
+      if (value) {
+        this.isValid = false;
+      }
     }
   }
 
