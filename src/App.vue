@@ -26,6 +26,7 @@ export default defineComponent({
         this.dlFile = file;
         this.parsedFile = new DLTextFile(offset);
         await this.parsedFile.readFile(file);
+        window.onbeforeunload = () => "Are you sure you want to leave this page? Unsaved progress will be lost.";
         this.ready = true;
       } catch (e) {
         console.error(e);
