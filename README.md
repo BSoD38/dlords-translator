@@ -1,8 +1,10 @@
 # dlords-translator
 
+[Try it here!](https://dlords.tysil.io/)
+
 This is a standalone tool I created to facilitate translation for the game "Dungeon Lords".
 
-This is made for the 1.5C version of the game, otherwise known as the "Collector's Edition".
+This is made for the C1.5 version of the game, otherwise known as the "Collector's Edition".
 It should work on earlier versions of the game, but I'm not too sure about the MMXII/Steam versions.
 
 ## Technical info
