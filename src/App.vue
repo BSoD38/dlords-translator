@@ -42,6 +42,11 @@ export default defineComponent({
       link.click();
       link.remove();
     },
+    replace({ indices, replaceWith }) {
+      for (const index of indices) {
+        this.parsedFile.textEntries[index].text = replaceWith;
+      }
+    },
   },
 });
 </script>
@@ -57,7 +62,7 @@ export default defineComponent({
           {{ error }}
         </p>
       </div>
-      <EditorComponent v-if="ready" :text="parsedFile" @save="encode"></EditorComponent>
+      <EditorComponent v-if="ready" :text="parsedFile" @save="encode" @replace="replace"></EditorComponent>
     </main>
   </div>
 </template>

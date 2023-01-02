@@ -2,6 +2,9 @@ import { encode, decode } from "@/utils/windows-1252/windows-1252";
 type MetadataTuple = [number, number][];
 type Buffer = number[];
 
+// eslint-disable-next-line no-control-regex
+export const ansiRegex = /^[\x00-\x7F\xA0-\xFF\u2013\u2014\u0152\u0153]*$/;
+
 export class DLTextFile {
   // The first 4 bytes seem to be used to identify the file
   magicBytes = new Uint8Array(0x04);
@@ -117,15 +120,16 @@ export class DLTextFile {
 
 export class DLTextEntry {
   public id: number;
-  private _text: string = "";
   public isValid: boolean = true;
+  private _text: string = "";
   public get text(): string {
     return this._text;
   }
+
   public set text(value: string) {
     value = value ?? "";
     // eslint-disable-next-line no-control-regex
-    if (/^[\x00-\x7F\xA0-\xFF\u2013\u2014\u0152\u0153]*$/.test(value)) {
+    if (ansiRegex.test(value)) {
       this.isValid = true;
       this._text = value;
     } else {
@@ -135,6 +139,8 @@ export class DLTextEntry {
       }
     }
   }
+
+  public marked = false;
 
   get byteLength(): number {
     // Length with null byte separator
