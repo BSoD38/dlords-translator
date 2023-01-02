@@ -68,7 +68,7 @@ export default {
       }
 
       if (!ansiRegex.test(replaceWith)) {
-        alert("Value is invalid. The value is empty or is not ANSI-compatible.");
+        alert("The given value contains characters unsupported by ANSI encoding.");
         return;
       }
 
