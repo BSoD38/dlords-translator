@@ -62,7 +62,13 @@ export default defineComponent({
           {{ error }}
         </p>
       </div>
-      <EditorComponent v-if="ready" :text="parsedFile" @save="encode" @replace="replace"></EditorComponent>
+      <EditorComponent
+        v-if="ready"
+        :search="search"
+        :text="parsedFile"
+        @replace="replace"
+        @save="encode"
+      ></EditorComponent>
     </main>
   </div>
 </template>
@@ -71,7 +77,7 @@ export default defineComponent({
 .app-container {
   background-color: #282828;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 main {
   background-color: var(--color-background);

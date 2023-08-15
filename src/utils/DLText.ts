@@ -3,7 +3,7 @@ type MetadataTuple = [number, number][];
 type Buffer = number[];
 
 // eslint-disable-next-line no-control-regex
-export const ansiRegex = /^[\x00-\x7F\xA0-\xFF\u2013\u2014\u0152\u0153]*$/;
+export const ansiRegex = /^[\x00-\x7F\xA0-\xFF]*$/;
 
 export class DLTextFile {
   // The first 4 bytes seem to be used to identify the file

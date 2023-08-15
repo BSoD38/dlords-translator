@@ -13,7 +13,11 @@
           </div>
           <div class="actions">
             <span title="Toggle text capitalisation" class="clickable" @click="toggleCapitalization(entry)">Aa</span>
-            <span title="Replace all occurrences of this string" class="clickable" @click="replaceOccurrences(entry)">
+            <span
+              title="Replace all occurrences of this string"
+              class="clickable"
+              @click="replaceOccurrences(entry.text)"
+            >
               🔍
             </span>
             <span title="Mark this entry for reference" class="clickable" @click="markEntry(entry)">✅</span>
@@ -50,17 +54,17 @@ export default {
         textEntry.text = textEntry.text.toUpperCase();
       }
     },
-    replaceOccurrences(textEntry) {
+    replaceOccurrences(str) {
       const occurrenceIndices = [];
       const occurrenceIDs = [];
       for (const textEntriesKey in this.text.textEntries) {
-        if (this.text.textEntries[textEntriesKey].text === textEntry.text) {
+        if (this.text.textEntries[textEntriesKey].text === str) {
           occurrenceIndices.push(textEntriesKey);
           occurrenceIDs.push(this.text.textEntries[textEntriesKey].id);
         }
       }
       const replaceWith = prompt(
-        `Found ${occurrenceIndices.length} occurrences of "${textEntry.text}", replace them with what text?`
+        `Found ${occurrenceIndices.length} occurrences of "${str}", replace them with what text?`
       );
 
       if (!replaceWith) {
@@ -68,7 +72,7 @@ export default {
       }
 
       if (!ansiRegex.test(replaceWith)) {
-        alert("The given value contains characters unsupported by ANSI encoding.");
+        alert("The replacement string contains characters unsupported by ANSI encoding.");
         return;
       }
 
